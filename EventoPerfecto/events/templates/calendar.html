@@ -1,0 +1,18 @@
+{% extends 'base.html'%}
+{% block title%}
+    <h4 style="text-align: center">--- CURRENT CALENDAR ---</h4>
+{% endblock title%}
+
+{% block content%}
+    <center>
+        Event Calendar - {{month}} {{year}}!! <br/>
+        <hr> <br/>
+        <h4 style="color: green">As of {{time}}</h4>
+       <div>
+           {{ cal|safe}}
+       </div>
+            <br/><br/><br/>
+        <h5>Copyright @ {{current_year}}</h5>
+
+    </center>
+{% endblock content%}
