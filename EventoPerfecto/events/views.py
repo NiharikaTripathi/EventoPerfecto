@@ -1,9 +1,12 @@
 from django.shortcuts import render
+from .forms import VenueForm
 from .models import Event, Venue, MyClubUser
 from datetime import datetime
 from calendar import HTMLCalendar
 import calendar
 import pytz
+from django.http import HttpResponseRedirect
+
 
 # Create your views here.
 def event_calendar(request, year=datetime.now().year, month=datetime.now().strftime("%B")):
@@ -32,3 +35,27 @@ def event_details():
 def all_events(request):
     events_list = Event.objects.all()
     return render(request, "event_list.html", {'event_list': events_list})
+
+
+def add_venue(request):
+    submitted = False
+    if request.method == 'POST':
+        form = VenueForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/add_venue?submitted=True')
+    else:
+        form = VenueForm
+        if 'submitted' in request.GET:
+            submitted = True
+    return render(request, 'add_venue.html',{'form' :form, 'submitted': submitted})
+
+
+def all_venues(request):
+    venue_list = Venue.objects.all()
+    return render(request, "venues.html", {'venue_list': venue_list})
+
+
+def show_venue(request, venue_id):
+    venue = Venue.objects.get(pk=venue_id)
+    return render(request, "show_venue.html", {'venue': venue})

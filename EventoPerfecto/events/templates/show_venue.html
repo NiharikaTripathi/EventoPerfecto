@@ -1,0 +1,27 @@
+{% extends 'base.html'%}
+{% block title%}
+    <h4 style="text-align: center">--- VENUE LIST ---</h4>
+{% endblock title%}
+
+{% block content%}
+<div class="card">
+  <div class="card-header">
+   <strong>{{ venue.name }}</strong>
+  </div>
+  <div class="card-body">
+        <p class="card-text">
+             <ul>
+                <li><strong> Address:</strong> {{venue.address}} </li>
+                <li><strong> Zip Code:</strong> {{venue.zip_code}} </li>
+                <li><strong>Phone:</strong> {{venue.phone}} </li>
+                <li><strong>Email:</strong> {{venue.email}} </li>
+                <li><strong>Web Address:</strong> <a href="{{ venue.web }}">{{venue.web}}</a></li>
+            </ul>
+        </p>
+
+  </div>
+
+</div>
+<br/> <br/>
+
+{% endblock content%}
