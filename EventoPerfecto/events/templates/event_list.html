@@ -26,6 +26,12 @@
         </p>
 
   </div>
+  <div class="card-footer text-body-secondary">
+    <a class="btn btn-outline-secondary btn-sm"
+       href = "{% url 'update-event' event.id %}" style="text-decoration:None ">Update Event </a>
+     <a class="btn btn-outline-danger btn-sm"
+       href = "{% url 'delete-event' event.id %}" style="text-decoration:None ">Delete Event </a>
+  </div>
 
 </div>
 <br/> <br/>

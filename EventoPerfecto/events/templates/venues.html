@@ -11,12 +11,17 @@
             {% for venue in venue_list %}
             <tr>
                 <td>
-                    <a href = "{% url 'show-venue' venue.id %}">{{venue}} </a>  </li>
+                    <a href = "{% url 'show-venue' venue.id %}" style="text-decoration:None ">{{venue}} </a>
+                </td>
+                <td align="right">
+                    <a class="btn btn-outline-secondary btn-sm"
+                       href = "{% url 'update-venue' venue.id %}" style="text-decoration:None ">Update </a>
+                    <a class="btn btn-outline-danger btn-sm"
+                       href = "{% url 'delete-venue' venue.id %}" style="text-decoration:None ">Delete </a>
                 </td>
             </tr>
             {% endfor%}
         </table>
-
 
     <br/>
 

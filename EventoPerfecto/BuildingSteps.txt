@@ -17,3 +17,19 @@ Using Django model form to generate post request to fill the data into the datab
 2. Adding the form attribute to custom html and design it using bootstrap
 3. Conditions for validation(form.is_valid) and successful entry in the db(form.save()) with the display message of SUCCESS!!
 4. listing all the venues(just their names) and attaching a clickable link for more information about that specific venue.
+
+Date: 15-Oct-2024
+Search, Update, Delete, Ordering - venue and event || Generating text files dynamically
+1.For searching: Input field with search button
+                  Linked the button to a searching route(url)
+                  View function for querying the db(filter by name)
+2.For update: Adding update button to all event and all venue page
+               Adding forms and pass value of instance as model instance of selected data to be updated.
+               (It automatically fills the data in the form. we just need to change the data to be updated)
+               Check validity of the form and save the data.
+               Redirects to the display all page.
+3.For delete: Adding delete button to all event and all venue page
+               deleting the item on click as it redirects to the same page after deleting the data from the db.
+4.Ordering: adding the order_by clause to ORM for fetching data in a specific order
+             order_by('?') - Randomly fetch data
+5.Generating text file dynamically:
