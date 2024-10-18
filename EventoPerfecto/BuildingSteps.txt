@@ -32,4 +32,18 @@ Search, Update, Delete, Ordering - venue and event || Generating text files dyna
                deleting the item on click as it redirects to the same page after deleting the data from the db.
 4.Ordering: adding the order_by clause to ORM for fetching data in a specific order
              order_by('?') - Randomly fetch data
-5.Generating text file dynamically:
+5.Generating text, csv and pdf file dynamically: first add the corresponding urls and view function.
+             save line by line
+             save inch by inch append to the empty list using reportlab
+
+Date: 16-Oct-2024 and 17-Oct-2024
+Pagination, styling pagination, customizing the django admin panel and user login and logout
+1.Pagination: Adding pagination to divide data into multiple pages using paginator class.
+2.Styling Pagination:give bootstrap styling to the pagination for easy access.
+3.Customizing Admin Panel: Adding different name to site title, site header etc.
+4.Login: Show the logout link if logged in and if not logged in show the login link with form on click.
+5.Logout: Log out of the website if logged in already.
+
+Date: 18-Oct-2024
+User registration
+

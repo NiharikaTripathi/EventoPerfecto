@@ -9,6 +9,7 @@ from reportlab.pdfgen import canvas
 from reportlab.lib.units import inch
 from reportlab.lib.pagesizes import letter
 
+
 from django.core.paginator import Paginator
 
 from .forms import VenueForm, EventForm
@@ -88,10 +89,17 @@ def add_venue(request):
     return render(request, 'add_venue.html',{'form' :form, 'submitted': submitted})
 
 # Display all Venues list
+#     venue_list = Venue.objects.all().order_by("?") # To show data randomly
+#     venue_list = Venue.objects.all()
+
 def all_venues(request):
-    # venue_list = Venue.objects.all().order_by("?")
-    venue_list = Venue.objects.all()
-    return render(request, "venues.html", {'venue_list': venue_list})
+    # Set up pagination: Paginator(call_to_db, per_page)
+    p=Paginator(Venue.objects.all(), 2)
+    page = request.GET.get('page')
+    venues = p.get_page(page)
+    nums = "a" * venues.paginator.num_pages
+    return render(request, "venues.html", {'venues': venues, 'nums':nums})
+
 
 # Display details of a Venue
 def show_venue(request, venue_id):
