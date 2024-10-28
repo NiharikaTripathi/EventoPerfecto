@@ -67,5 +67,16 @@ Access venue owner, relate Attendees to User Auth model, my events page, search 
 2. Attendee and manager both refer to the User model (use related_name="some_name_to_refer_that_specific_field" to tell
                         them apart, it refers to a specific field which is establishes the connection with another model
                         through ForeignKey and ManyToMany data type)
+3. My Event: Display those events only which is attended by the current login user.
+4. Search Event: Search event based on description of the event.
 
-3. My Event:
+Date: 28-Oct-2024
+Adding image to venue and adding calculated fields
+1. Image: Adding media and static confs in the settings file, in the templates to add/update venue adding encrypt =
+            "multipart/form-data" and in their respective view functions add request.FILES to form attribute.
+2. Adding Calculated Fields: These are the fields that are dynamic and are keep changing. So they are added to the model
+            using a @property decorator and fetched through the function call.
+3. Removing Groups: Removing groups model from the admin page by unregistering the group from django.contrib.auth.models
+4. Adding approved field to the event model. so that only those fields are displayed which are approved by the admin.
+
+Date: 29-Oct-2024

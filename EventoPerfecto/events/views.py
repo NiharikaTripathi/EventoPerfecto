@@ -39,7 +39,7 @@ def event_calendar(request, year=datetime.now().year, month=datetime.now().strft
 #Event Views
 # Display all Events
 def all_events(request):
-    events_list = Event.objects.all().order_by('event_date')
+    events_list = Event.objects.all().order_by('-event_date')
     return render(request, "event_list.html", {'event_list': events_list})
 
 
@@ -72,12 +72,18 @@ def add_event(request):
 # Update an Event
 def update_event(request, event_id):
     event = Event.objects.get(pk=event_id)
-    if request.user.is_superuser or request.user == event.manager:
+    if request.user.is_superuser:
         form = EventFormAdmin(request.POST or None, instance=event)
-    else:
+        if form.is_valid():
+            form.save()
+            messages.success(request, "The event has been successfully updated.")
+
+            return redirect('list-events')
+    elif request.user == event.manager:
         form = EventForm(request.POST or None, instance=event)
         if form.is_valid():
             form.save()
+            messages.success(request, "The event has been successfully updated.")
             return redirect('list-events')
     return render(request, "update_event.html", {'event': event, 'form': form})
 
@@ -127,7 +133,7 @@ def search_events(request):
 def add_venue(request):
     submitted = False
     if request.method == 'POST':
-        form = VenueForm(request.POST)
+        form = VenueForm(request.POST, request.FILES)
         if form.is_valid():
             venue = form.save(commit=False)
             venue.owner = request.user.id
@@ -140,8 +146,8 @@ def add_venue(request):
     return render(request, 'add_venue.html',{'form' :form, 'submitted': submitted})
 
 
-# Display all Venues list
-def all_venues(request):
+def all_venues(request):# Display all Venues list
+
     p=Paginator(Venue.objects.all(), 4) # Set up pagination: Paginator(call_to_db, per_page)
     page = request.GET.get('page')
     venues = p.get_page(page)
@@ -172,7 +178,7 @@ def search_venue(request):
 # Update a Venue
 def update_venue(request, venue_id):
     venue = Venue.objects.get(pk=venue_id)
-    form = VenueForm(request.POST or None, instance=venue)
+    form = VenueForm(request.POST or None,request.FILES or None,  instance=venue)
     if venue.owner == request.user.id:
         if form.is_valid():
             form.save()

@@ -14,8 +14,14 @@
                 <li><strong>Email:</strong> {{venue.email}} </li>
                 <li><strong>Web Address:</strong> <a href="{{ venue.web }}">{{venue.web}}</a></li>
                 <li><strong>Owner:</strong> {{venue_owner}} </li>
+                <li><strong>Image:</strong> {{venue.image}} </li>
 
             </ul>
+            <br/>
+            {% if  venue.image %}
+                <img src="{{venue.image.url}}" width="700">
+
+            {% endif %}
         </p>
 
   </div>
