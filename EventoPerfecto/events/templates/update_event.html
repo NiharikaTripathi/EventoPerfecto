@@ -1,21 +1,26 @@
 {% extends 'base.html'%}
 
-{% block title%}
-    <h3>Update Event: {{ event }}</h3>
-{% endblock title%}
-
 {% block content%}
+    {% if user.is_authenticated %}
+        {% if user == event.manager or user.is_superuser%}
+            <h1>Update Event: {{ event }}</h1>
+            <br/> <br/>
+            {% if submitted %}
+                Your Event was submitted successfully!!!
 
-    <br/> <br/>
-    {% if submitted %}
-        Your Event was submitted successfully!!!
+            {% else %}
+                 <form action="" method="POST">
+                     {% csrf_token %}
+                     {{ form.as_p}}
+                     <input type="submit" value="Update" class="btn btn-secondary">
+                 </form>
+            {% endif %}
+        {% else %}
+            <h2>Access Denied!! Only event manager and admin can edit or delete their event.</h2>
+        {% endif %}
 
     {% else %}
-        <form action="" method="POST">
-            {% csrf_token %}
-            {{ form.as_p}}
-            <input type="submit" value="Update" class="btn btn-secondary">
-        </form>
+    <h2>Sorry...You have to login to view this page </h2>
     {% endif %}
 
 {% endblock content%}

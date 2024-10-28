@@ -1,20 +1,18 @@
 {% extends 'base.html'%}
-{% block title%}
-
-{% endblock title%}
 
 {% block content%}
     {% if searched %}
-    <center> <h3 >RESULT FOR "{{searched}}"...</h3> </center>
+    <h1 align="center" >RESULT FOR "{{searched}}"...</h1>
     <br/>
-    <table class="table table-hover table-striped table-bordered">
+    <table class="table table-hover table-striped ">
           {% for venue in venues%}
             <tr>
                 <td>
-                    <a href="{% url 'show-venue' venue.id %}">{{ venue }}</a>
+                    <a href="{% url 'show-venue' venue.id %}"> {{ venue }}</a><br/>
                 </td>
             </tr>
         {% endfor %}
+    </table>
     {% else%}
         <h3>Hey! You forgot to search for a venue...</h3>
     {% endif %}

@@ -1,25 +1,23 @@
 {% extends 'base.html'%}
 {% block title%}
-<center>
-    <h2>--- Register To The Website---</h2>
-</center>
-<br/> <br/>
-
 {% endblock title%}
 
 {% block content%}
+        <h1 align="center">--- Register ---</h1><br/>
+        {% if form.errors %}
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                There is an error with your form!!
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        {% endif %}
 
-    {% if form.errors %}
-        <div class="alert alert-warning alert-dismissible fade show" role="alert">
-            There is an error with your form!!
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-      </div>
-    {% endif %}
+        <form action="{%  url 'register'%}" method=POST>
+          {% csrf_token %}
+          {{ form.as_p }}
+          <p  align = "center">
+                <button type="submit" class="btn btn-secondary">Submit</button>
+            </p>
+        </form>
 
-    <form action="{%  url 'register'%}" method=POST>
-      {% csrf_token %}
-      {{ form.as_p }} <br/>
-      <button type="submit" class="btn btn-secondary">Submit</button>
-    </form>
 
 {% endblock content%}

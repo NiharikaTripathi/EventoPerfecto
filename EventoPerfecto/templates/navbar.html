@@ -15,8 +15,16 @@
           </a>
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="{% url 'list-events' %}">Event</a></li>
+
+            {% if user.is_authenticated %}
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="{% url 'add-event' %}">Add Event</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="{% url 'my-events' %}">My Event</a></li>
+            {% endif %}
+
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="{% url 'add-event' %}">Add Event</a></li>
+            <li><a class="dropdown-item" href="{% url 'search-events' %}">Search Event</a></li>
           </ul>
         </li>
         <li class="nav-item dropdown">
@@ -25,8 +33,11 @@
           </a>
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="{% url 'list-venues' %}">All Venues</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="{% url 'add-venue' %}">Add Venue</a></li>
+
+            {% if user.is_authenticated %}
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="{% url 'add-venue' %}">Add Venue</a></li>
+            {% endif %}
           </ul>
         </li>
         <li class="nav-item dropdown">
@@ -39,13 +50,18 @@
             <li><a class="dropdown-item" href="{% url 'venue-csv' %}">Venue CSV File</a></li>
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="{% url 'venue-text' %}">Venue Text File</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="{% url 'event-pdf' %}">Event PDF File</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="{% url 'event-csv' %}">Event CSV File</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="{% url 'event-text' %}">Event Text File</a></li>
           </ul>
         </li>
 
         {% if user.is_authenticated %}
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'logout' %}">Logout</a>
-            </li>
+            <li class="nav-item"><a class="nav-link disable" href="#">Hi, {{user.first_name}}</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Logout</a></li>
         {% else %}
              <li class="nav-item">
               <a class="nav-link" href="{% url 'register' %}">Register</a>

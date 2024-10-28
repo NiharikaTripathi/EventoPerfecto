@@ -6,9 +6,9 @@ Installation of the Project:
 Step by step project building:
 1. Starting the project : django-admin startproject <project-name>
 2. Starting the app : django-admin startapp <app-name>
-3. Project: EventoPerfecto, App: events
+3. Project: EventoPerfecto, App: events, member
 4. Create project level templates: Base files
-5. Create app level templates:
+5. Create app level templates: templates: add_event.html
 
 Date: 14-Oct-2024
 Django Forms, linking different pages and bootstrap for designing
@@ -45,5 +45,27 @@ Pagination, styling pagination, customizing the django admin panel and user logi
 5.Logout: Log out of the website if logged in already.
 
 Date: 18-Oct-2024
-User registration
+User registration, adding extra fields, styling
 
+Date: 21-Oct-2024
+Lock down, Edit access for specific user only
+1. Lock down: Applying authentication for specific pages. Logged in user can add, delete and update event and venues.
+              Others cannot even view these pages.
+2. Edit Access: Update in the event and venue can only be done by specific user only
+
+Date: 21-Oct-2024 & 22-Oct-2024
+Add venue owner, different forms for different user, delete restrictions
+1. Adding a new field in the venue model: Owner: int This will store the id of the user who added a venue.
+2. Different forms: Privilege to the admin that he can assign manager to an event and other who add the event become
+    its manager automatically.
+3. Delete Restrictions: Only admin and the manager of that event can delete an event. Same goes for deleting venue.
+
+Date: 23-Oct-2024
+Access venue owner, relate Attendees to User Auth model, my events page, search event
+1. Access Venue Owner: The owner field is int which is actually the id of the person who added the venue(logged in user)
+                        Accessing the other details from user model using owner field.
+2. Attendee and manager both refer to the User model (use related_name="some_name_to_refer_that_specific_field" to tell
+                        them apart, it refers to a specific field which is establishes the connection with another model
+                        through ForeignKey and ManyToMany data type)
+
+3. My Event:

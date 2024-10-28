@@ -1,22 +1,21 @@
 {% extends 'base.html'%}
-{% block title%}
-<center>
-    <h2>--- Add Venue To Database ---</h2>
-</center>
-{% endblock title%}
 
 {% block content%}
-    <center>
-    <br/> <br/>
-    {% if submitted %}
-        Your Venue was submitted successfully!!!
+    {% if user.is_authenticated %}
+
+        <h1 align="center">--- Add Venue To Database ---</h1>
+        <br/> <br/>
+        {% if submitted %}
+            Your Venue was submitted successfully!!!
+        {% else %}
+            <form action="" method=POST>
+                {% csrf_token %}
+                {{ form.as_p}}
+            <p align="center"><input type="submit" value="Submit" class="btn btn-secondary"></p>
+            </form>
+        {% endif %}
 
     {% else %}
-        <form action="" method=POST>
-            {% csrf_token %}
-            {{ form.as_p}}
-            <input type="submit" value="Submit" class="btn btn-secondary">
-        </form>
+        <h2>Sorry...You have to login to view this page </h2>
     {% endif %}
-    </center>
 {% endblock content%}

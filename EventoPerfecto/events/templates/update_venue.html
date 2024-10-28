@@ -1,21 +1,27 @@
 {% extends 'base.html'%}
 
 {% block title%}
-    <h3>Update Venue: {{ venue }}</h3>
 {% endblock title%}
 
 {% block content%}
-<center>
-    <br/> <br/>
-    {% if submitted %}
-        Your Venue was submitted successfully!!!
+    {% if user.is_authenticated and venue.owner == user.id%}
+<!--or venue.owner == user.id-->
+        <div align="center">
+            <h1>Update Venue: {{ venue }}</h1>
+            <br/> <br/>
 
+            {% if submitted %}
+                Your Venue was submitted successfully!!!
+            {% else %}
+                    <form action="" method="POST">
+                        {% csrf_token %}
+                        {{ form.as_p}}
+                        <input type="submit" value="Update" class="btn btn-secondary">
+                    </form>
+            {% endif %}
+        </div>
     {% else %}
-        <form action="" method="POST">
-            {% csrf_token %}
-            {{ form.as_p}}
-            <input type="submit" value="Update" class="btn btn-secondary">
-        </form>
+        <h2>Sorry...You don't have access to update!!</h2>
     {% endif %}
-</center>
+
 {% endblock content%}
